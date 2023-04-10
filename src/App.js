@@ -1,25 +1,37 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import Quiz from './components/quiz'
+import { Switch, Route } from "react-router-dom";
+import Login from './components/Login';
+import Signup from './components/SignUp';
+import Nav from './components/Nav';
+import Home from './components/Home';
 
-function App() {
+
+
+const App = () => {
+  const isLoggidIn = !!localStorage.getItem("token");
+  console.log(isLoggidIn);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      {isLoggidIn&& (<Nav/>)}
+      <Switch>
+      <Route path ="/" exact>
+         <Home/>
+         </Route>
+         <Route path ="/quiz">
+         {isLoggidIn&&(<Quiz/>)}
+         {!isLoggidIn&&(<Login/>)}
+
+         </Route>
+         <Route path="/login">
+          <Login />
+        </Route>
+        <Route path="/signup">
+          <Signup />
+        </Route>
+      </Switch>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
