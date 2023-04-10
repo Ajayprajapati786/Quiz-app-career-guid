@@ -78,7 +78,7 @@ function Quiz() {
   const [quizFinished, setQuizFinished] = useState(false);
 
   return (
-    <div className="app">
+    <div className="app container">
       {quizFinished ? (
         <div className="score-section">
           You scored {score} correct out of {questions.length} questions <br />
